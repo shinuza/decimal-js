@@ -1,5 +1,4 @@
-function Decimal(num) {
-    
+function Decimal(num) {    
     if(this.constructor == window.constructor ) {
         return new Decimal(num);
     }
