@@ -42,7 +42,7 @@ def visit(watched, dirname, names):
 
 def run():
     #VARIABLE
-    os.system('')
+    os.system('js decimaljs.js')
 
 if __name__ == '__main__':
     watched = []
