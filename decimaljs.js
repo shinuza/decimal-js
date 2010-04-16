@@ -45,23 +45,15 @@ Decimal.prototype.add = function(target) {
     target = Decimal(target);
     
     var ops = [this, target];
-    ops.sort(function(x, y) {
-	if(x.exp > y.exp) {
-	    return -1;
-	}
-	if(x.exp < y.exp) {
-	    return 1;
-	}
-	if(x.exp == y.exp) {
-	    return 0;
-	}
-    });
+    ops.sort(function(x, y) { return x.repr.exp - y.repr.exp });
+    
+    var tiniest = ops[0].repr.exp;
+    var biggest = ops[1].repr.exp;
 
-    var tiniest = ops[1].exp;
-
-    var fst = ops[0]._as_exp(Math.abs(tiniest));
-    var snd = ops[1]._as_exp(Math.abs(tiniest));
-    var calc = String(fst * 1 + snd * 1);
+    var fst = Decimal._format(ops[1].repr.value, biggest - tiniest) * 1;
+    var snd = ops[0].repr.value * 1;
+    var calc = String(fst + snd);
+   
 
     return Decimal._format(calc, tiniest);
 }
@@ -70,7 +62,6 @@ Decimal.prototype.mul = function(target) {
     target = Decimal(target);
     
     var ops = [this, target];
-
     var fst = ops[0].repr.value;
     var snd = ops[1].repr.value;
     var calc = String(fst * snd)
@@ -82,8 +73,6 @@ Decimal.prototype.mul = function(target) {
 Decimal.prototype.toString = function() {
     return this.internal;
 }
-
-
 
 
 Decimal._neg_exp = function(str, position) {
@@ -104,9 +93,9 @@ Decimal._pos_exp = function(str, exp) {
     return str + zeros;
 }
 
-Decimal._format = function(str, exp) {
+Decimal._format = function(num, exp) {
     var method = exp >= 0 ? '_pos_exp' : '_neg_exp';
-    return Decimal[method](str, exp);
+    return Decimal[method](String(num), exp);
 }
 
 Decimal.__zero = function(exp) {
@@ -207,13 +196,16 @@ assert.equals(Decimal('24301.12').repr.value, '2430112')
 assert.equals(Decimal('24301.12').repr.exp, '-2')
 
 
-/* Addition
+// Addition
+assert.equals(Decimal('123000').add('123.456'), '123123.456')
+assert.equals(Decimal('123.456').add('123000'), '123123.456')
 assert.equals(Decimal('100.2').add('1203.12'), '1303.32')
+assert.equals(Decimal('1203.12').add('100.2'), '1303.32')
+
 assert.equals(Decimal('1.2').add('1000'), '1001.2')
 assert.equals(Decimal('1.245').add('1010'), '1011.245')
 assert.equals(Decimal('5.1').add('1.901'), '7.001')
 assert.equals(Decimal('1001.0').add('7.12'), '1008.12')
-*/
 
 // Multiplication
 assert.equals(Decimal('50').mul('2.901'), '145.05')
