@@ -70,27 +70,12 @@ Decimal.prototype.mul = function(target) {
     target = Decimal(target);
     
     var ops = [this, target];
-    ops.sort(function(x, y) {
-	if(x.exp > y.exp) {
-	    return -1;
-	}
-	if(x.exp < y.exp) {
-	    return 1;
-	}
-	if(x.exp == y.exp) {
-	    return 0;
-	}
-    });
-
-    var tiniest = ops[1].exp;
-    var greatest = ops[0].exp;
 
     var fst = ops[0].repr.value;
-    var snd = ops[1]._as_exp(greatest);
+    var snd = ops[1].repr.value;
+    var calc = String(fst * snd)
 
-    var calc = String(fst * snd);
-
-    return Decimal._format(calc, greatest + tiniest);
+    return Decimal._format(calc, ops[0].repr.exp + ops[1].repr.exp);
 }
 
 
@@ -228,9 +213,9 @@ assert.equals(Decimal('1.2').add('1000'), '1001.2')
 assert.equals(Decimal('1.245').add('1010'), '1011.245')
 assert.equals(Decimal('5.1').add('1.901'), '7.001')
 assert.equals(Decimal('1001.0').add('7.12'), '1008.12')
+*/
 
-
-//* Multiplication
+// Multiplication
 assert.equals(Decimal('50').mul('2.901'), '145.05')
 assert.equals(Decimal('-50').mul('2.901'), '-145.05')
 assert.equals(Decimal('-50').mul('-2.901'), '145.05')
@@ -241,6 +226,5 @@ assert.equals(Decimal('-50').mul('-2901'), '145050')
 
 assert.equals(Decimal('1.125').mul('0.1201'), '0.1351125');
 assert.equals(Decimal('01.125').mul('0.1201'), '0.1351125');
-*/
 
 assert.summary(); 
