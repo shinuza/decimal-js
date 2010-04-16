@@ -9,20 +9,20 @@ function Decimal(num) {
 
     this.internal = String(num);
     this.exp = this.get_exp();
-    this.repr = this.get_repr();
+    this.repr = this._get_repr();
 }
 
 Decimal.global = this;
 
-Decimal.prototype.as_exp = function(exp) {
+Decimal.prototype._as_exp = function(exp) {
     var exp = exp + this.repr.exp;
-    return Decimal._zeros(this.repr.value, exp);
+    return parseInt(Decimal._zeros(this.repr.value, exp),10);
 }
 
-Decimal.prototype.get_repr = function() {
-    var value = this.internal.split('.').join('');
+Decimal.prototype._get_repr = function() {
+    var value = parseInt(this.internal.split('.').join(''), 0);
 
-    return {'value':value, 'exp':this.exp};
+    return {'value':value.toString(), 'exp':this.exp};
 }
 
 Decimal.prototype.get_exp = function() {
@@ -48,12 +48,11 @@ Decimal.prototype.add = function(target) {
 
     var tiniest = ops[1].exp;
 
-    var fst = ops[0].as_exp(Math.abs(tiniest));
-    var snd = ops[1].as_exp(Math.abs(tiniest));
+    var fst = ops[0]._as_exp(Math.abs(tiniest));
+    var snd = ops[1]._as_exp(Math.abs(tiniest));
     var calc = String(fst * 1 + snd * 1);
 
     return Decimal._format(calc, tiniest);
-
 }
 
 
@@ -102,9 +101,7 @@ var assert = {
 
 
 
-//TESTS Decimal
-
-
+// Static methods
 assert.equals(Decimal._period('100135',-1), '10013.5')
 assert.equals(Decimal._period('100135',-3), '100.135')
 assert.equals(Decimal._period('100135',-4), '10.0135')
@@ -116,18 +113,35 @@ assert.equals(Decimal._zeros('1013',3), '1013000')
 
 
 
+// Instanciation
 assert.equals(Decimal(5) instanceof Decimal, true)
-
-
-
 assert.equals(Decimal(5), '5')
 assert.equals(Decimal('5'), '5')
 assert.equals(Decimal(5.1), '5.1')
-assert.equals(Decimal(Decimal(5.1)), '5.1')
+assert.equals(Decimal(Decimal(5.1)) instanceof Decimal, true)
 
 
-assert.equals(Decimal('100.2').as_exp(2), '10020')
+// Private methods
+assert.equals(Decimal('100.2')._as_exp(2), '10020')
+assert.equals(Decimal('0.2')._as_exp(2), '20')
+assert.equals(Decimal('0.2')._as_exp(3), '200')
+assert.equals(Decimal('0.02')._as_exp(3), '20')
 
+assert.equals(Decimal('100.2')._get_repr(2).value, '1002')
+assert.equals(Decimal('100.2')._get_repr(2).exp, '-1')
+
+assert.equals(Decimal('0.2')._get_repr(2).value, '2')
+assert.equals(Decimal('0.2')._get_repr(2).exp, '-1')
+
+assert.equals(Decimal('0.02')._get_repr(2).value, '2')
+assert.equals(Decimal('0.02')._get_repr(2).exp, '-2')
+
+assert.equals(Decimal('2000000')._get_repr(2).value, '2000000')
+assert.equals(Decimal('2000000')._get_repr(2).exp, '0')
+
+
+
+// Addition
 
 assert.equals(Decimal('100.2').add('1203.12'), '1303.32')
 assert.equals(Decimal('1.2').add('1000'), '1001.2')
