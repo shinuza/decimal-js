@@ -5,10 +5,10 @@
   - [ ] Update runtests.py
 
 
-* TODO Library [0/6]
+* TODO Library [2/6]
   - [ ] Refactoring
-  - [ ] Implement multiplication
+  - [X] Implement multiplication
   - [ ] Implement division
   - [ ] Implement subtraction
-  - [ ] Provide formatting?
+  - [X] Provide formatting?
   - [ ] Provide mootools implementation?
