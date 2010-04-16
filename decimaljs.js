@@ -104,7 +104,15 @@ Decimal._format = function(num, exp) {
 
 Decimal.__zero = function(exp) {
     return new Array(exp + 1).join('0');
-}
+};
+
+//Generics
+['add','mul'].forEach(function(method) {
+    Decimal[method] = function(a, b) {
+	return Decimal(a)[method](b);
+    }
+});
+
 
 
 var assert = {
