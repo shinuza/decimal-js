@@ -1,9 +1,6 @@
 var that = this;
 
 
-String.prototype
-
-
 function Decimal(num) {    
     if(this == that) {
         return new Decimal(num);
