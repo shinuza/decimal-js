@@ -106,6 +106,7 @@ Decimal.__zero = function(exp) {
     return new Array(exp + 1).join('0');
 };
 
+
 //Generics
 ['add','mul'].forEach(function(method) {
     Decimal[method] = function(a, b) {
@@ -134,9 +135,6 @@ var assert = {
 	this.log(this.tests + ' tests, ' + this.failed + ' failed')
     }
 }
-
-
-
 
 
 // Static methods
@@ -239,5 +237,9 @@ assert.equals(Decimal('-50').mul('-2901'), '145050')
 
 assert.equals(Decimal('1.125').mul('0.1201'), '0.1351125');
 assert.equals(Decimal('01.125').mul('0.1201'), '0.1351125');
+
+assert.equals(Decimal('1.125').mul('0.1201'), Decimal.mul('1.125', '0.1201'));
+assert.equals(Decimal('01.125').mul('0.1201'), Decimal.mul('01.125', '0.1201'));
+
 
 assert.summary(); 
