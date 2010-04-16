@@ -72,12 +72,14 @@ Decimal.prototype.mul = function(target) {
     });
 
     var tiniest = ops[1].exp;
+    var greatest = ops[0].exp;
 
-    var fst = ops[0]._as_exp(Math.abs(tiniest));
-    var snd = ops[1]._as_exp(Math.abs(tiniest));
+    var fst = ops[0].repr.value;
+    var snd = ops[1]._as_exp(greatest);
+
     var calc = String(fst * snd);
 
-    return Decimal._format(calc, tiniest + tiniest);
+    return Decimal._format(calc, greatest + tiniest);
 }
 
 
@@ -179,6 +181,10 @@ assert.equals(Decimal('0.2')._as_exp(2), '20')
 assert.equals(Decimal('0.2')._as_exp(3), '200')
 assert.equals(Decimal('0.02')._as_exp(3), '20')
 
+assert.equals(Decimal('0.02')._as_exp(-1), '0.002')
+assert.equals(Decimal('0.02')._as_exp(-2), '0.0002')
+assert.equals(Decimal('0.02')._as_exp(-3), '0.00002')
+
 
 assert.equals(Decimal('100.2')._get_repr(2).value, '1002')
 assert.equals(Decimal('100.2')._get_repr(2).exp, '-1')
@@ -189,8 +195,12 @@ assert.equals(Decimal('0.2')._get_repr(2).exp, '-1')
 assert.equals(Decimal('0.02')._get_repr(2).value, '2')
 assert.equals(Decimal('0.02')._get_repr(2).exp, '-2')
 
+assert.equals(Decimal('200')._get_repr(2).value, '200')
+assert.equals(Decimal('200')._get_repr(2).exp, '1')
+
+
 assert.equals(Decimal('2000000')._get_repr(2).value, '2000000')
-assert.equals(Decimal('2000000')._get_repr(2).exp, '0')
+assert.equals(Decimal('2000000')._get_repr(2).exp, '1')
 
 
 
@@ -201,7 +211,7 @@ assert.equals(Decimal('1.245').add('1010'), '1011.245')
 assert.equals(Decimal('5.1').add('1.901'), '7.001')
 assert.equals(Decimal('1001.0').add('7.12'), '1008.12')
 
-
+/*
 // Multiplication
 assert.equals(Decimal('50').mul('2.901'), '145.05')
 assert.equals(Decimal('-50').mul('2.901'), '-145.05')
@@ -213,6 +223,6 @@ assert.equals(Decimal('-50').mul('-2901'), '145050')
 
 assert.equals(Decimal('1.125').mul('0.1201'), '0.1351125');
 assert.equals(Decimal('01.125').mul('0.1201'), '0.1351125');
-
+*/
 
 assert.summary(); 
