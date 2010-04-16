@@ -12,8 +12,6 @@ function Decimal(num) {
     this.repr = this._get_repr();
 }
 
-Decimal.global = this;
-
 Decimal.prototype._as_exp = function(exp) {
     var exp = exp + this.repr.exp;
     return parseInt(Decimal._format(this.repr.value, exp),10);
@@ -29,6 +27,8 @@ Decimal.prototype.get_exp = function() {
     var decimal = this.internal.split('.')[1] || "";
     return -1 * decimal.length; 
 }
+
+
 
 Decimal.prototype.add = function(target) {
     target = Decimal(target);
@@ -55,10 +55,37 @@ Decimal.prototype.add = function(target) {
     return Decimal._format(calc, tiniest);
 }
 
+Decimal.prototype.mul = function(target) {
+    target = Decimal(target);
+    
+    var ops = [this, target];
+    ops.sort(function(x, y) {
+	if(x.exp > y.exp) {
+	    return -1;
+	}
+	if(x.exp < y.exp) {
+	    return 1;
+	}
+	if(x.exp == y.exp) {
+	    return 0;
+	}
+    });
+
+    var tiniest = ops[1].exp;
+
+    var fst = ops[0]._as_exp(Math.abs(tiniest));
+    var snd = ops[1]._as_exp(Math.abs(tiniest));
+    var calc = String(fst * snd);
+
+    return Decimal._format(calc, tiniest + tiniest);
+}
+
 
 Decimal.prototype.toString = function() {
     return this.internal;
 }
+
+
 
 
 Decimal._neg_exp = function(str, position) {
@@ -152,6 +179,7 @@ assert.equals(Decimal('0.2')._as_exp(2), '20')
 assert.equals(Decimal('0.2')._as_exp(3), '200')
 assert.equals(Decimal('0.02')._as_exp(3), '20')
 
+
 assert.equals(Decimal('100.2')._get_repr(2).value, '1002')
 assert.equals(Decimal('100.2')._get_repr(2).exp, '-1')
 
@@ -167,12 +195,24 @@ assert.equals(Decimal('2000000')._get_repr(2).exp, '0')
 
 
 // Addition
-
 assert.equals(Decimal('100.2').add('1203.12'), '1303.32')
 assert.equals(Decimal('1.2').add('1000'), '1001.2')
 assert.equals(Decimal('1.245').add('1010'), '1011.245')
 assert.equals(Decimal('5.1').add('1.901'), '7.001')
 assert.equals(Decimal('1001.0').add('7.12'), '1008.12')
+
+
+// Multiplication
+assert.equals(Decimal('50').mul('2.901'), '145.05')
+assert.equals(Decimal('-50').mul('2.901'), '-145.05')
+assert.equals(Decimal('-50').mul('-2.901'), '145.05')
+
+assert.equals(Decimal('50').mul('2901'), '145050')
+assert.equals(Decimal('-50').mul('2901'), '-145050')
+assert.equals(Decimal('-50').mul('-2901'), '145050')
+
+assert.equals(Decimal('1.125').mul('0.1201'), '0.1351125');
+assert.equals(Decimal('01.125').mul('0.1201'), '0.1351125');
 
 
 assert.summary(); 
