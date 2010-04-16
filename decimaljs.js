@@ -16,7 +16,7 @@ Decimal.global = this;
 
 Decimal.prototype._as_exp = function(exp) {
     var exp = exp + this.repr.exp;
-    return parseInt(Decimal._zeros(this.repr.value, exp),10);
+    return parseInt(Decimal._format(this.repr.value, exp),10);
 }
 
 Decimal.prototype._get_repr = function() {
@@ -61,27 +61,31 @@ Decimal.prototype.toString = function() {
 }
 
 
-Decimal._period = function(str, position) {
+Decimal._neg_exp = function(str, position) {
     position = Math.abs(position);
     var offset = position - str.length;
     var sep = '.'
 
     if(offset >= 0) {
-	str = new Array(offset + 1 ).join('0') + str;
+	str = Decimal.__zero(offset) + str;
 	sep = 0 + '.';
     }
 
-    return str.substr(0, str.length - position) + sep + str.substr( -position )
+    return str.substr(0, str.length - position) + sep + str.substr(-position)
 }
 
-Decimal._zeros = function(str, exp) {
-    var zeros = Array(exp + 1).join('0');
+Decimal._pos_exp = function(str, exp) {
+    var zeros = Decimal.__zero(exp);
     return str + zeros;
 }
 
 Decimal._format = function(str, exp) {
-    var method = exp >= 0 ? '_zeros' : '_period';
+    var method = exp >= 0 ? '_pos_exp' : '_neg_exp';
     return Decimal[method](str, exp);
+}
+
+Decimal.__zero = function(exp) {
+    return new Array(exp + 1).join('0');
 }
 
 
@@ -110,16 +114,21 @@ var assert = {
 
 
 // Static methods
-assert.equals(Decimal._period('100135',-1), '10013.5')
-assert.equals(Decimal._period('100135',-3), '100.135')
-assert.equals(Decimal._period('100135',-4), '10.0135')
-assert.equals(Decimal._period('100135',-5), '1.00135')
-assert.equals(Decimal._period('100135',-6), '0.100135')
-assert.equals(Decimal._period('100135',-9), '0.000100135')
+assert.equals(Decimal._neg_exp('100135',-1), '10013.5')
+assert.equals(Decimal._neg_exp('100135',-3), '100.135')
+assert.equals(Decimal._neg_exp('100135',-4), '10.0135')
+assert.equals(Decimal._neg_exp('100135',-5), '1.00135')
+assert.equals(Decimal._neg_exp('100135',-6), '0.100135')
+assert.equals(Decimal._neg_exp('100135',-9), '0.000100135')
 
-assert.equals(Decimal._zeros('1013',0), '1013')
-assert.equals(Decimal._zeros('1013',1), '10130')
-assert.equals(Decimal._zeros('1013',3), '1013000')
+
+assert.equals(Decimal._pos_exp('1013',0), '1013')
+assert.equals(Decimal._pos_exp('1013',1), '10130')
+assert.equals(Decimal._pos_exp('1013',3), '1013000')
+assert.equals(Decimal._pos_exp('1013',4), '10130000')
+assert.equals(Decimal._pos_exp('1013',5), '101300000')
+assert.equals(Decimal._pos_exp('1013',6), '1013000000')
+assert.equals(Decimal._pos_exp('1013',9), '1013000000000')
 
 assert.equals(Decimal._format('1013',0), '1013')
 assert.equals(Decimal._format('1013',1), '10130')
