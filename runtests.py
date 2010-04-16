@@ -31,6 +31,7 @@ def watch(watched, f):
 def visit(watched, dirname, names):
     for name in names:
         if name.startswith('.') or os.path.isdir(os.path.join(dirname, name)):
+            print name
             i = names.index(name)
             del names[i]
             continue
@@ -45,9 +46,7 @@ def run():
     os.system('js decimaljs.js')
 
 if __name__ == '__main__':
-    watched = []
-    root = os.getcwd()
-    os.path.walk(root, visit, watched)
+    watched = glob('*.js')
 
     run()
     if len(sys.argv) > 1 and sys.argv[1] in ['-f', '--forever']:
