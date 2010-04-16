@@ -1,8 +1,5 @@
-var that = this;
-
-
-function Decimal(num) {    
-    if(this == that) {
+function Decimal(num) {
+    if(this.constructor != Decimal) {
         return new Decimal(num);
     }
 
@@ -15,27 +12,12 @@ function Decimal(num) {
     this.repr = this.get_repr();
 }
 
-Decimal._period = function(str, position) {
-    position = -1 * position;
-    return str.substr(0, str.length - position) + '.' + str.substr( -position )
-}
-
-Decimal._zeros = function(str, exp) {
-    var zeros = Array(exp + 1).join('0');
-    return str + zeros;
-}
-
+Decimal.global = this;
 
 Decimal.prototype.as_exp = function(exp) {
     var exp = exp + this.repr.exp;
     return Decimal._zeros(this.repr.value, exp);
 }
-
-Decimal._format = function(str, exp) {
-    var method = exp >= 0 ? '_zeros' : '_period';
-    return Decimal[method](str, exp);
-}
-
 
 Decimal.prototype.get_repr = function() {
     var value = this.internal.split('.').join('');
@@ -80,21 +62,39 @@ Decimal.prototype.toString = function() {
 }
 
 
+Decimal._period = function(str, position) {
+    position = -1 * position;
+    return str.substr(0, str.length - position) + '.' + str.substr( -position )
+}
+
+Decimal._zeros = function(str, exp) {
+    var zeros = Array(exp + 1).join('0');
+    return str + zeros;
+}
+
+Decimal._format = function(str, exp) {
+    var method = exp >= 0 ? '_zeros' : '_period';
+    return Decimal[method](str, exp);
+}
 
 
 var assert = {
+    log : function() {
+	//FIX ME
+	return typeof(console) != 'undefined' ? console.log : print;
+    }(),
     tests : 0,
     failed : 0,
     equals : function(given, expected) {
 	this.tests += 1;
 	if(given != expected) {
 	    this.failed += 1;
-	    print('Failed: "' + given + '" does not equal "' + expected + '"')
+	    this.log('Failed: "' + given + '" does not equal "' + expected + '"')
 	}
     },
     summary : function() {
-	print()
-	print(this.tests + ' tests, ' + this.failed + ' failed')
+	this.log()
+	this.log(this.tests + ' tests, ' + this.failed + ' failed')
     }
 }
 
@@ -132,7 +132,8 @@ assert.equals(Decimal('100.2').as_exp(2), '10020')
 assert.equals(Decimal('100.2').add('1203.12'), '1303.32')
 assert.equals(Decimal('1.2').add('1000'), '1001.2')
 assert.equals(Decimal('1.245').add('1010'), '1011.245')
+assert.equals(Decimal('5.1').add('1.901'), '7.001')
+assert.equals(Decimal('1001.0').add('7.12'), '1008.12')
 
 
-
-assert.summary();
+assert.summary(); 
