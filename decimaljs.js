@@ -58,8 +58,8 @@ Decimal.prototype.add = function(target) {
     return Decimal._format(calc, tiniest);
 }
 
-Decimal.add = function(a,b) {
-    return Decimal(a).add(b);
+Decimal.prototype.sub = function(target) {
+    return this.add(target * -1)
 }
 
 Decimal.prototype.mul = function(target) {
@@ -108,7 +108,7 @@ Decimal.__zero = function(exp) {
 
 
 //Generics
-['add','mul'].forEach(function(method) {
+['add','mul', 'sub'].forEach(function(method) {
     Decimal[method] = function(a, b) {
 	return Decimal(a)[method](b);
     }
@@ -211,12 +211,10 @@ assert.equals(Decimal('123000').add('123.456'), '123123.456')
 assert.equals(Decimal('123.456').add('123000'), '123123.456')
 assert.equals(Decimal('100.2').add('1203.12'), '1303.32')
 assert.equals(Decimal('1203.12').add('100.2'), '1303.32')
-
 assert.equals(Decimal('123000').add('-123.456'), '122876.544')
 assert.equals(Decimal('123.456').add('-123000'), '-122876.544')
 assert.equals(Decimal('100.2').add('-1203.12'), '-1102.92')
 assert.equals(Decimal('1203.12').add('-100.2'), '1102.92')
-
 assert.equals(Decimal('1.2').add('1000'), '1001.2')
 assert.equals(Decimal('1.245').add('1010'), '1011.245')
 assert.equals(Decimal('5.1').add('1.901'), '7.001')
@@ -225,16 +223,24 @@ assert.equals(Decimal('1001.0').add('7.12'), '1008.12')
 assert.equals(Decimal('1001.0').add('7.12'), Decimal.add('1001.0', '7.12'))
 assert.equals(Decimal('1001.0').add('-7.12'), Decimal.add('1001.0', '-7.12'))
 
+// Subtraction
+assert.equals(Decimal('123000').sub('123.456'), '122876.544')
+assert.equals(Decimal('123.456').sub('123000'), '-122876.544')
+assert.equals(Decimal('100.2').sub('1203.12'), '-1102.92')
+assert.equals(Decimal('1203.12').sub('100.2'), '1102.92')
+assert.equals(Decimal('-1203.12').sub('-100.2'), '-1102.92')
+
+assert.equals(Decimal('123.456').sub('123000'), Decimal.sub('123.456','123000'))
+assert.equals(Decimal('100.2').sub('1203.12'), Decimal.sub('100.2', '1203.12'))
+
 
 // Multiplication
 assert.equals(Decimal('50').mul('2.901'), '145.05')
 assert.equals(Decimal('-50').mul('2.901'), '-145.05')
 assert.equals(Decimal('-50').mul('-2.901'), '145.05')
-
 assert.equals(Decimal('50').mul('2901'), '145050')
 assert.equals(Decimal('-50').mul('2901'), '-145050')
 assert.equals(Decimal('-50').mul('-2901'), '145050')
-
 assert.equals(Decimal('1.125').mul('0.1201'), '0.1351125');
 assert.equals(Decimal('01.125').mul('0.1201'), '0.1351125');
 
