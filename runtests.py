@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import os
 import os.path
@@ -6,6 +6,10 @@ import sys
 import time
 
 from glob import glob
+
+COMMAND = 'js tests/runner.js'
+watched = glob('*.js') + glob('tests/*.js')
+
 
 def watch(watched, f):
     mtimes = []
@@ -42,13 +46,15 @@ def visit(watched, dirname, names):
 
 
 def run():
-    #VARIABLE
-    os.system('js decimaljs.js')
+    os.system(COMMAND)
 
-if __name__ == '__main__':
-    watched = glob('*.js')
 
+def main():
     run()
     if len(sys.argv) > 1 and sys.argv[1] in ['-f', '--forever']:
         print 'Running forever...'
         watch(watched, run)
+
+
+if __name__ == '__main__':
+    main()
