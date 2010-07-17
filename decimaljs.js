@@ -105,11 +105,15 @@ Decimal.__zero = function(exp) {
     return new Array(exp + 1).join('0');
 };
 
+(function() {
+    //Generics
+    var methods = ['add','mul', 'sub'];
 
-//Generics
-['add','mul', 'sub'].forEach(function(method) {
-    Decimal[method] = function(a, b) {
-	    return Decimal(a)[method](b);
+    for(var i=0; i < methods.length; i++) {
+        (function(method) {
+            Decimal[method] = function(a, b) {
+	            return Decimal(a)[method](b);
+            }
+        })(methods[i]);
     }
-});
-
+})();
