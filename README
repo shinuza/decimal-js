@@ -3,15 +3,5 @@ Author : Samori Gorse
 
 Dependencies : None
 
-
-Description
------------------------
-
 This is an implentation of a Decimal type in javascript.
 It's aim is to provide correct computation for decimal types.
-
-
-Running the tests
------------------------
-You will need Python and a Javascript interpreter that supports
-the load([file,]) function.
