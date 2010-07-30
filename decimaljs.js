@@ -51,9 +51,9 @@ Decimal.prototype.add = function(target) {
 
     var fst = Decimal._format(ops[1].repr.value, biggest - tiniest) * 1;
     var snd = ops[0].repr.value * 1;
+    
     var calc = String(fst + snd);
-   
-
+    
     return Decimal._format(calc, tiniest);
 }
 
@@ -85,10 +85,12 @@ Decimal._neg_exp = function(str, position) {
 
     if(offset >= 0) {
 	    str = Decimal.__zero(offset) + str;
-	    sep = 0 + '.';
+	    sep = '0.';
     }
+    
+    var length = str.length;
 
-    return str.substr(0, str.length - position) + sep + str.substr(-position);
+    return str.substr(0, length - position) + sep + str.substring(length - position, length);
 }
 
 Decimal._pos_exp = function(str, exp) {

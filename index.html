@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Test suite</title>
+    </head>
+    <body>
+        <script>
+            function print() {
+                var args = arguments;
+                
+                for(var i=0; i < args.length; i++) {
+                    document.write(args[i] + '<br>');
+                }
+            }
+        
+            function load() {
+                var args = arguments;
+                
+                for(var i=0; i < args.length; i++) {
+                    var script = document.createElement('script');
+                    script.src = args[i];
+                    document.body.appendChild(script);
+                }
+            }
+        </script>
+        <script src="tests/runner.js"></script>
+    </body>
+</html>

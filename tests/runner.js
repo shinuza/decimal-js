@@ -30,4 +30,6 @@ load(
     'tests/subtraction.js'
 );
 
-assert.summary(); 
+setTimeout(function() {
+    assert.summary()
+}, 2000);
