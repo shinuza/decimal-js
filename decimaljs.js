@@ -4,7 +4,7 @@ function Decimal(num) {
     }
 
     if(num instanceof Decimal) {
-	    return num;
+        return num;
     }
 
     this.internal = String(num);
@@ -21,19 +21,19 @@ Decimal.prototype._get_repr = function() {
 
 
     if(!post) {
-	var trailing_zeros = pre.match(/0+$/);
+       var trailing_zeros = pre.match(/0+$/);
 
-	if(trailing_zeros) {
-	    var l = trailing_zeros[0].length;
-	    value = pre.substr(0, pre.length - l);
-	    exp = l;
-	} else {
-	    value = pre;
-	    exp = 0;
-	}
+        if(trailing_zeros) {
+            var l = trailing_zeros[0].length;
+            value = pre.substr(0, pre.length - l);
+            exp = l;
+        } else {
+            value = pre;
+            exp = 0;
+        }
     } else {
-	    value = parseInt(this.internal.split('.').join(''), 10);
-	    exp = post.length * -1;
+        value = parseInt(this.internal.split('.').join(''), 10);
+        exp = post.length * -1;
     }
 
     return {'value':value, 'exp':exp};
@@ -46,15 +46,15 @@ Decimal.prototype.add = function(target) {
     var ops = [this, target];
     ops.sort(function(x, y) { return x.repr.exp - y.repr.exp });
     
-    var tiniest = ops[0].repr.exp;
+    var smallest = ops[0].repr.exp;
     var biggest = ops[1].repr.exp;
 
-    var fst = Decimal._format(ops[1].repr.value, biggest - tiniest) * 1;
+    var fst = Decimal._format(ops[1].repr.value, biggest - smallest) * 1;
     var snd = ops[0].repr.value * 1;
     
     var calc = String(fst + snd);
     
-    return Decimal._format(calc, tiniest);
+    return Decimal._format(calc, smallest);
 }
 
 Decimal.prototype.sub = function(target) {
@@ -84,8 +84,8 @@ Decimal._neg_exp = function(str, position) {
     var sep = '.'
 
     if(offset >= 0) {
-	    str = Decimal.__zero(offset) + str;
-	    sep = '0.';
+        str = Decimal.__zero(offset) + str;
+        sep = '0.';
     }
     
     var length = str.length;
@@ -114,7 +114,7 @@ Decimal.__zero = function(exp) {
     for(var i=0; i < methods.length; i++) {
         (function(method) {
             Decimal[method] = function(a, b) {
-	            return Decimal(a)[method](b);
+                return Decimal(a)[method](b);
             }
         })(methods[i]);
     }
