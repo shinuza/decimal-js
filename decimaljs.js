@@ -63,25 +63,38 @@ Decimal.prototype.sub = function(target) {
 
 Decimal.prototype.mul = function(target) {
     target = Decimal(target);
-    
-    var ops = [this, target];
-    var fst = ops[0].repr.value;
-    var snd = ops[1].repr.value;
-    var calc = String(fst * snd)
 
-    return Decimal._format(calc, ops[0].repr.exp + ops[1].repr.exp);
+    var calc = String(this.repr.value * target.repr.value)
+
+    return Decimal._format(calc, this.repr.exp + target.repr.exp);
 }
 
+Decimal.prototype.div = function(target) {
+    target = Decimal(target);
+    
+    var ops = [this, target];
+    ops.sort(function(x, y) { return x.repr.exp - y.repr.exp });
+    
+    var smallest = ops[0].repr.exp;
+    var biggest = ops[1].repr.exp;
+
+    var fst = Decimal._format(ops[1].repr.value, biggest - smallest) * 1;
+    var snd = ops[0].repr.value * 1;
+    
+    var calc = String(fst / snd);
+    
+    return Decimal._format(calc, smallest);
+}
 
 Decimal.prototype.toString = function() {
     return this.internal;
 }
 
-
 Decimal._neg_exp = function(str, position) {
     position = Math.abs(position);
+    
     var offset = position - str.length;
-    var sep = '.'
+    var sep = Decimal.SEPARATOR;
 
     if(offset >= 0) {
         str = Decimal.__zero(offset) + str;
@@ -89,13 +102,15 @@ Decimal._neg_exp = function(str, position) {
     }
     
     var length = str.length;
+    var head = str.substr(0, length - position);
+    var tail = str.substring(length - position, length).replace(/\./g, '');
 
-    return str.substr(0, length - position) + sep + str.substring(length - position, length);
+    return head + sep + tail;
 }
 
 Decimal._pos_exp = function(str, exp) {
     var zeros = Decimal.__zero(exp);
-    return str + zeros;
+    return String(str + zeros);
 }
 
 Decimal._format = function(num, exp) {
@@ -107,9 +122,11 @@ Decimal.__zero = function(exp) {
     return new Array(exp + 1).join('0');
 };
 
+Decimal.SEPARATOR = '.';
+
 (function() {
     //Generics
-    var methods = ['add','mul', 'sub'];
+    var methods = ['add','mul', 'sub', 'div'];
 
     for(var i=0; i < methods.length; i++) {
         (function(method) {
