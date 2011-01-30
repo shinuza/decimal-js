@@ -13,15 +13,30 @@
                 }
             }
         
-            function load() {
-                var args = arguments;
+        
+            function load(scripts, cbk) {
+                var head = scripts.shift();
                 
-                for(var i=0; i < args.length; i++) {
-                    var script = document.createElement('script');
-                    script.src = args[i];
+                var script = document.createElement('script');
+                script.src = head;
+                
+                if(scripts.length > 0) {
+                    script.onreadystatechange= function () {
+                        if (this.readyState == 'complete') {
+                            load(scripts, cbk);
+                        }
+                    };
+                    
+                    script.onload = function() {
+                        load(scripts, cbk);
+                    };
+                    
                     document.body.appendChild(script);
+                } else {
+                    cbk();
                 }
-            }
+                
+            };
         </script>
         <script src="tests/runner.js"></script>
     </body>

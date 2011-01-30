@@ -1,14 +1,14 @@
 * Project [0/4]
   - [ ] Write a real README
   - [ ] Use a javascript test framework
-  - [ ] Re-organize test suite
-  - [ ] Update runtests.py
+  - [X] Re-organize test suite
+  - [X] Update runtests.py
 
 
 * TODO Library [2/6]
-  - [ ] Refactoring
+  - [X] Refactoring
   - [X] Implement multiplication
   - [ ] Implement division
-  - [ ] Implement subtraction
+  - [X] Implement subtraction
   - [X] Provide formatting?
   - [ ] Provide mootools implementation?
