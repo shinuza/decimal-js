@@ -17,8 +17,9 @@ var assert = {
     }
 };
 
+// Port this to faceless engine
 load([
-    './decimaljs.js',
+    'lib/decimaljs.js',
     'tests/decimal_type.js',
     'tests/format.js',
     'tests/neg_exp.js',

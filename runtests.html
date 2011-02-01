@@ -17,10 +17,10 @@
             function load(scripts, cbk) {
                 var head = scripts.shift();
                 
-                var script = document.createElement('script');
-                script.src = head;
-                
-                if(scripts.length > 0) {
+                if(head != undefined) {
+                    var script = document.createElement('script');
+                    script.src = head;
+                    
                     script.onreadystatechange= function () {
                         if (this.readyState == 'complete') {
                             load(scripts, cbk);
