@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Test suite</title>
+    </head>
+    <body>
+        <script>
+            function print() {
+                var args = arguments;
+                
+                for(var i=0; i < args.length; i++) {
+                    document.write(args[i] + '<br>');
+                }
+            }
+
+            function require(src, cb) {
+                if(!(src in require.modules)) {
+                    var script = document.createElement('script');
+                    script.src = src;
+                    document.body.appendChild(script);
+                    require.modules[src] = 1;
+                }
+                if(cb) {
+                    cb();
+                }
+            }
+
+            require.modules = {};
+        </script>
+        <script src="runner.js"></script>
+    </body>
+</html>
