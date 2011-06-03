@@ -1,4 +1,4 @@
-var Decimal = Decimal || require('../lib/decimaljs.js');
+var Decimal = Decimal || require('../lib/decimal.js');
 var assert = assert || require('assert');
 
 
