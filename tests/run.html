@@ -4,29 +4,14 @@
         <title>Test suite</title>
     </head>
     <body>
-        <script>
-            function print() {
-                var args = arguments;
-                
-                for(var i=0; i < args.length; i++) {
-                    document.write(args[i] + '<br>');
-                }
-            }
-
-            function require(src, cb) {
-                if(!(src in require.modules)) {
-                    var script = document.createElement('script');
-                    script.src = src;
-                    document.body.appendChild(script);
-                    require.modules[src] = 1;
-                }
-                if(cb) {
-                    cb();
-                }
-            }
-
-            require.modules = {};
-        </script>
-        <script src="runner.js"></script>
+        <script src="vendor/assert.js"></script>
+        <script src="vendor/require.js"></script>
+        <script src="../lib/decimaljs.js"></script>
+        <script src="decimal_type.js"></script>
+        <script src="addition.js"></script>
+        <script src="subtraction.js"></script>
+        <script src="multiplication.js"></script>
+        <script src="division.js"></script>
+        <script src="chaining.js"></script>
     </body>
 </html>

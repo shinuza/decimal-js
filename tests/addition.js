@@ -1,5 +1,5 @@
-var Decimal = require('../lib/decimaljs.js');
-var assert = require('assert');
+var Decimal = Decimal || require('../lib/decimaljs.js');
+var assert = assert || require('assert');
 
 
 assert.equal(Decimal('123000').add('123.456'), '123123.456');

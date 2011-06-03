@@ -1,6 +1,5 @@
-var Decimal = require('../lib/decimaljs.js');
-var assert = require('assert');
-
+var Decimal = Decimal || require('../lib/decimaljs.js');
+var assert = assert || require('assert');
 
 assert.equal(Decimal(5) instanceof Decimal, true);
 assert.equal(Decimal(5), '5');

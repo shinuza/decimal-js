@@ -1,5 +1,5 @@
-var Decimal = require('../lib/decimaljs.js');
-var assert = require('assert');
+var Decimal = Decimal || require('../lib/decimaljs.js');
+var assert = assert || require('assert');
 
 
 assert.equal(Decimal(1.005).mul(50.01).mul(0.03), "1.5078015");
