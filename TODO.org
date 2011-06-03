@@ -1,7 +1,0 @@
-* TODO Library [6/6]
-  - [X] Refactoring
-  - [X] Implement multiplication
-  - [X] Implement division
-  - [X] Implement subtraction
-  - [X] Provide formatting?
-  - [X] Make it compatible with nodejs
