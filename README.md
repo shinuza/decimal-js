@@ -18,6 +18,24 @@ Source : http://floating-point-gui.de/
 I wrote this because I needed to do simple computation in the browser
 and I couldn't find a lightweight library to do it.
 
+How to use?
+===========
+
+
+In the browser
+--------------
+
+    <script src="lib/decimal.js"></script>
+
+In node
+-------
+
+    npm install decimal
+
+then in your program
+
+    var Decimal = require('decimal');
+
 
 Examples
 =======
