@@ -1,0 +1,20 @@
+{
+  "name": "decimal",
+  "description": "Simple decimal arithmetic for the browser and node.js!",
+  "author": "Samori Gorse <samorigorse@gmail.com>",
+  "version": "0.0.2",
+  "keywords": [
+    "arithmetic",
+    "decimal",
+    "float",
+    "calculation"
+  ],
+  "main": "./lib/decimal",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shinuza/decimaljs.git"
+  },
+  "engines": {
+    "node": "0.4.x"
+  }
+}
