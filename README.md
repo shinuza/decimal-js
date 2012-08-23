@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/shinuza/decimal-js.png)](http://travis-ci.org/shinuza/decimal-js)
 Decimal
 ======
 
