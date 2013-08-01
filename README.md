@@ -55,6 +55,15 @@ Examples
     >>> Decimal.mul('4.01', '2.01').toNumber()
     8.0601
 
+Order of Operations
+===========
+Decimal.js orders operations from left-to-right. You should note that, building complex equations.
+    
+    >>> Decimal('5').add('5').mul('5').toNumber()
+    50
+
+    >>> 5+5*5
+    30
 
 Can I help?
 ===========
