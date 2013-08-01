@@ -87,6 +87,18 @@ another `Decimal`.
 
 Returns the `Decimal` instance as a string.
 
+.toFixed()
+------------------
+
+Returns the `Decimal` instance as a string with fixed count of decimal part of number.
+Similar to Number.toFixed()
+
+    >>> Decimal('2.33333333333333').toFixed(20)
+    "2.33333333333333000000"
+
+    >>> 2.33333333333333.toFixed(20)
+    "2.33333333333332992865"
+
 .toNumber()
 -----------
 
