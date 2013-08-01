@@ -40,30 +40,31 @@ then in your program
 Examples
 =======
 
-    >>> 1.1 + 2.2
+    >>> 1.1 + 2.2;
     3.3000000000000003
 
-    >>> Decimal('1.1').add('2.2').toNumber()
+    >>> Decimal('1.1').add('2.2').toNumber();
     3.3
 
-    >>> 4.01 * 2.01
+    >>> 4.01 * 2.01;
     8.060099999999998
 
-    >>> Decimal('4.01').mul('2.01').toNumber()
+    >>> Decimal('4.01').mul('2.01').toNumber();
     8.0601
 
-    >>> Decimal.mul('4.01', '2.01').toNumber()
+    >>> Decimal.mul('4.01', '2.01').toNumber();
     8.0601
 
 Order of Operations
 ===========
 Decimal.js orders operations from left-to-right. You should note that, building complex equations.
+
+    >>> 5+5*5
+    30
     
     >>> Decimal('5').add('5').mul('5').toNumber()
     50
 
-    >>> 5+5*5
-    30
 
 Can I help?
 ===========
@@ -93,16 +94,16 @@ Returns the `Decimal` instance as a string.
 Returns the `Decimal` instance as a string with fixed count of decimal part of number.
 Similar to Number.toFixed()
 
-    >>> Decimal('2.33333333333333').toFixed(20)
-    "2.33333333333333000000"
-
-    >>> 2.33333333333333.toFixed(20)
+    >>> 2.33333333333333.toFixed(20);
     "2.33333333333332992865"
+
+    >>> Decimal('2.33333333333333').toFixed(20);
+    "2.33333333333333000000"
 
     >>> 666666666666.0.toFixed(-2);
     "666666666700"
-    
-    >>> Decimal('666666666666.0').toFixed(-2)
+
+    >>> Decimal('666666666666.0').toFixed(-2);
     "666666666600"
 
 .toNumber()
@@ -135,10 +136,34 @@ Return a new `Decimal` containing the instance value integrally divided by `n`.
 -------
 
 Return a new `Decimal` containing the absolute value.
-Similar to Math.abs
+Similar to Math.abs.
 
     >>> Decimal('-600').abs();
     "600"
     
     >>> Decimal.abs('-600');
     "600"
+
+.floor(n)
+-------
+
+Return a new `Decimal` containing the number rounded downward.
+Similar to Math.floor.
+
+    >>> Decimal('-1.5').floor().toString();
+    "-2"
+    
+    >>> Decimal.floor('1.5').toString();
+    "1"
+
+.ceil(n)
+-------
+
+Return a new `Decimal` containing the number rounded upward.
+Similar to Math.ceil.
+
+    >>> Decimal('-1.5').ceil().toString();
+    "-1"
+    
+    >>> Decimal.ceil('1.5').toString();
+    "2"
