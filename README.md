@@ -130,3 +130,15 @@ Return a new `Decimal` containing the instance value multiplied by `n`.
 
 Return a new `Decimal` containing the instance value integrally divided by `n`.
 
+
+.abs(n)
+-------
+
+Return a new `Decimal` containing the absolute value.
+Similar to Math.abs
+
+    >>> Decimal('-600').abs();
+    "600"
+    
+    >>> Decimal.abs('-600');
+    "600"
