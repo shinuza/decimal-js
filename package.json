@@ -16,5 +16,8 @@
   },
   "engines": {
     "node": ">=0.4.x"
+  },
+  "devDependencies": {
+    "prettier": "3.4.2"
   }
 }
