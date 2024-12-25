@@ -9,6 +9,7 @@
     "float",
     "calculation"
   ],
+  "license": "MIT",
   "main": "./lib/decimal",
   "repository": {
     "type": "git",
