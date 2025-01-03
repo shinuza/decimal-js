@@ -3,6 +3,7 @@
   "description": "Simple decimal arithmetic for the browser and node.js!",
   "author": "Samori Gorse <samorigorse@gmail.com>",
   "version": "0.0.2",
+  "type": "module",
   "keywords": [
     "arithmetic",
     "decimal",
@@ -16,6 +17,9 @@
     "url": "git://github.com/shinuza/decimal-js.git"
   },
   "engines": {
-    "node": ">=0.4.x"
+    "node": "*"
+  },
+  "scripts": {
+    "test": "make test"
   }
 }
