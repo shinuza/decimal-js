@@ -1,5 +1,10 @@
 # Decimal.js
 
+[![CI](https://github.com/shinuza/decimal-js/actions/workflows/test.yml/badge.svg)](https://github.com/shinuza/decimal-js/actions/workflows/test.yml)
+[![GitHub license](https://img.shields.io/github/license/shinuza/decimal-js)](https://github.com/shinuza/decimal-js/blob/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/decimal-js)](https://www.npmjs.com/package/decimal-js)
+[![GitHub issues](https://img.shields.io/github/issues/shinuza/decimal-js)](https://github.com/shinuza/decimal-js/issues)
+
 Simple decimal arithmetic for the browser _and_ node.js!
 
 # Why?
