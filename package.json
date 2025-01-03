@@ -20,6 +20,11 @@
     "node": "*"
   },
   "scripts": {
-    "test": "make test"
+    "test": "make test",
+    "format": "prettier --write \"**/*.{js,json,yml,md}\"",
+    "format:check": "prettier --check \"**/*.{js,json,yml,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2"
   }
 }

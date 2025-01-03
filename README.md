@@ -1,10 +1,8 @@
 # Decimal.js
 
-Simple decimal arithmetic for the browser *and* node.js!
+Simple decimal arithmetic for the browser _and_ node.js!
 
-
-Why?
-=======
+# Why?
 
     Why don’t my numbers, like 0.1 + 0.2 add up to a nice round 0.3,
     and instead I get a weird result like 0.30000000000000004?
@@ -19,11 +17,10 @@ and I couldn't find a lightweight library to do it.
 
 ## How to use?
 
-
 #### In the browser
 
 ```html
-    <script src="lib/decimal.js"></script>
+<script src="lib/decimal.js"></script>
 ```
 
 #### In Node.js / Deno
@@ -35,17 +32,16 @@ and I couldn't find a lightweight library to do it.
 then in your program
 
 ```js
-    let Decimal = require('decimal');
+let Decimal = require('decimal');
 ```
 
-Examples
-========
+# Examples
 
 ```js
     >>> 1.1 + 2.2
     3.3000000000000003
 ```
-   
+
 ```js
     >>> Decimal('1.1').add('2.2').toNumber()
     3.3
@@ -72,42 +68,33 @@ Of course you can, I suck at math, and this implementation is very naive.
 If you are a math Guru and you see something wrong or a
 way to simplify things you can send in a pull request.
 
-
 ## Methods
 
-Decimal(n)
-------------------
+## Decimal(n)
 
 Create a new `Decimal` from `n`. `n` can be a string, integer, or
 another `Decimal`.
 
-.toString()
-------------------
+## .toString()
 
 Returns the `Decimal` instance as a string.
 
-.toNumber()
------------
+## .toNumber()
 
 Turn a `Decimal` into a `Number`.
 
-.add(n)
--------
+## .add(n)
 
 Return a new `Decimal` containing the instance value plus `n`.
 
-.sub(n)
--------
+## .sub(n)
 
 Return a new `Decimal` containing the instance value minus `n`.
 
-.mul(n)
--------
+## .mul(n)
 
 Return a new `Decimal` containing the instance value multiplied by `n`.
 
-.div(n)
--------
+## .div(n)
 
 Return a new `Decimal` containing the instance value integrally divided by `n`.
-
