@@ -1,5 +1,4 @@
-Decimal
-======
+# Decimal.js
 
 Simple decimal arithmetic for the browser *and* node.js!
 
@@ -18,54 +17,63 @@ Source : http://floating-point-gui.de/
 I wrote this because I needed to do simple computation in the browser
 and I couldn't find a lightweight library to do it.
 
-How to use?
-===========
+## How to use?
 
 
-In the browser
---------------
+#### In the browser
 
+```html
     <script src="lib/decimal.js"></script>
+```
 
-In node
--------
+#### In Node.js / Deno
 
+```bash
     npm install decimal
+```
 
 then in your program
 
-    var Decimal = require('decimal');
-
+```js
+    let Decimal = require('decimal');
+```
 
 Examples
-=======
+========
 
+```js
     >>> 1.1 + 2.2
     3.3000000000000003
-
+```
+   
+```js
     >>> Decimal('1.1').add('2.2').toNumber()
     3.3
+```
 
+```js
     >>> 4.01 * 2.01
     8.060099999999998
+```
 
+```js
     >>> Decimal('4.01').mul('2.01').toNumber()
     8.0601
+```
 
+```js
     >>> Decimal.mul('4.01', '2.01').toNumber()
     8.0601
+```
 
-
-Can I help?
-===========
+## Can I help?
 
 Of course you can, I suck at math, and this implementation is very naive.
 If you are a math Guru and you see something wrong or a
 way to simplify things you can send in a pull request.
 
 
-Methods
-=======
+## Methods
 
 Decimal(n)
 ------------------
