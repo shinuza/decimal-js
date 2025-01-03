@@ -99,6 +99,13 @@ let Decimal = require('decimal');
 // Static method
 >>> Decimal.div('1.21', '0.1').toString()
 '12.1'
+
+// Division by zero
+>>> Decimal('1.21').div('0').toString()
+node:internal/modules/run_main:122
+    triggerUncaughtException(...)
+    ^
+[DivisionByZeroError: Division by zero]
 ```
 
 ## Can I help?
