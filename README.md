@@ -4,7 +4,7 @@ Simple decimal arithmetic for the browser _and_ node.js!
 
 # Why?
 
-    Why don’t my numbers, like 0.1 + 0.2 add up to a nice round 0.3,
+    Why don't my numbers, like 0.1 + 0.2 add up to a nice round 0.3,
     and instead I get a weird result like 0.30000000000000004?
 
     Because internally, computers use a format (binary floating-point)
@@ -70,31 +70,88 @@ way to simplify things you can send in a pull request.
 
 ## Methods
 
-## Decimal(n)
+### Decimal(n)
 
 Create a new `Decimal` from `n`. `n` can be a string, integer, or
 another `Decimal`.
 
-## .toString()
+### Basic Operations
+
+#### .toString()
 
 Returns the `Decimal` instance as a string.
 
-## .toNumber()
+#### .toNumber()
 
 Turn a `Decimal` into a `Number`.
 
-## .add(n)
+#### .add(n)
 
 Return a new `Decimal` containing the instance value plus `n`.
 
-## .sub(n)
+#### .sub(n)
 
 Return a new `Decimal` containing the instance value minus `n`.
 
-## .mul(n)
+#### .mul(n)
 
 Return a new `Decimal` containing the instance value multiplied by `n`.
 
-## .div(n)
+#### .div(n)
 
 Return a new `Decimal` containing the instance value integrally divided by `n`.
+
+### Numeric Operations
+
+#### .abs()
+
+Returns a new `Decimal` containing the absolute value.
+
+```js
+>>> Decimal('-123.456').abs().toString()
+'123.456'
+```
+
+#### .floor()
+
+Returns a new `Decimal` rounded down to the nearest integer.
+
+```js
+>>> Decimal('123.456').floor().toString()
+'123'
+>>> Decimal('-123.456').floor().toString()
+'-124'
+```
+
+#### .ceil()
+
+Returns a new `Decimal` rounded up to the nearest integer.
+
+```js
+>>> Decimal('123.456').ceil().toString()
+'124'
+>>> Decimal('-123.456').ceil().toString()
+'-123'
+```
+
+#### .toFixed(decimals)
+
+Returns a string representation of the decimal with a fixed number of decimal places. Rounds the last decimal place.
+
+```js
+>>> Decimal('123.456').toFixed(2)
+'123.46'
+>>> Decimal('123').toFixed(2)
+'123.00'
+```
+
+### Static Methods
+
+All instance methods are also available as static methods:
+
+```js
+>>> Decimal.add('1.1', '2.2').toString()
+'3.3'
+>>> Decimal.abs('-123.456').toString()
+'123.456'
+```
