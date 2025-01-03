@@ -25,8 +25,8 @@ and I couldn't find a lightweight library to do it.
 
 #### In Node.js / Deno
 
-```bash
-    npm install decimal
+```sh
+npm install decimal
 ```
 
 then in your program
@@ -37,29 +37,68 @@ let Decimal = require('decimal');
 
 # Examples
 
-```js
-    >>> 1.1 + 2.2
-    3.3000000000000003
-```
+### Addition
 
 ```js
-    >>> Decimal('1.1').add('2.2').toNumber()
-    3.3
+// Regular JavaScript
+>>> 0.1 + 0.2
+0.30000000000000004
+
+// Using Decimal.js
+>>> Decimal('0.1').add('0.2').toString()
+'0.3'
+
+// Static method
+>>> Decimal.add('0.1', '0.2').toString()
+'0.3'
 ```
 
-```js
-    >>> 4.01 * 2.01
-    8.060099999999998
-```
+### Subtraction
 
 ```js
-    >>> Decimal('4.01').mul('2.01').toNumber()
-    8.0601
+// Regular JavaScript
+>>> 0.3 - 0.1
+0.19999999999999998
+
+// Using Decimal.js
+>>> Decimal('0.3').sub('0.1').toString()
+'0.2'
+
+// Static method
+>>> Decimal.sub('0.3', '0.1').toString()
+'0.2'
 ```
 
+### Multiplication
+
 ```js
-    >>> Decimal.mul('4.01', '2.01').toNumber()
-    8.0601
+// Regular JavaScript
+>>> 4.01 * 2.01
+8.060099999999998
+
+// Using Decimal.js
+>>> Decimal('4.01').mul('2.01').toString()
+'8.0601'
+
+// Static method
+>>> Decimal.mul('4.01', '2.01').toString()
+'8.0601'
+```
+
+### Division
+
+```js
+// Regular JavaScript
+>>> 1.21 / 0.1
+12.100000000000001
+
+// Using Decimal.js
+>>> Decimal('1.21').div('0.1').toString()
+'12.1'
+
+// Static method
+>>> Decimal.div('1.21', '0.1').toString()
+'12.1'
 ```
 
 ## Can I help?
@@ -81,25 +120,55 @@ another `Decimal`.
 
 Returns the `Decimal` instance as a string.
 
+```js
+>>> Decimal('123.456').toString()
+'123.456'
+```
+
 #### .toNumber()
 
 Turn a `Decimal` into a `Number`.
+
+```js
+>>> Decimal('123.456').toNumber()
+123.456
+```
 
 #### .add(n)
 
 Return a new `Decimal` containing the instance value plus `n`.
 
+```js
+>>> Decimal('0.1').add('0.2').toString()
+'0.3'
+```
+
 #### .sub(n)
 
 Return a new `Decimal` containing the instance value minus `n`.
+
+```js
+>>> Decimal('0.3').sub('0.1').toString()
+'0.2'
+```
 
 #### .mul(n)
 
 Return a new `Decimal` containing the instance value multiplied by `n`.
 
+```js
+>>> Decimal('4.01').mul('2.01').toString()
+'8.0601'
+```
+
 #### .div(n)
 
 Return a new `Decimal` containing the instance value integrally divided by `n`.
+
+```js
+>>> Decimal('1.21').div('0.1').toString()
+'12.1'
+```
 
 ### Numeric Operations
 
