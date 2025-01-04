@@ -220,9 +220,9 @@ Returns a new `Decimal` rounded up to the nearest integer.
 Returns a string representation of the decimal with a fixed number of decimal places. Rounds the last decimal place.
 
 ```js
->>> Decimal('123.456').toFixed(2)
+>>> Decimal('123.456').toFixed('2')
 '123.46'
->>> Decimal('123').toFixed(2)
+>>> Decimal('123').toFixed('2')
 '123.00'
 ```
 
