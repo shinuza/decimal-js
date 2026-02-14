@@ -1,6 +1,6 @@
 # Decimal.js
 
-# Deprecation Notice
+# ❌ Deprecation Notice ❌
 
 This package is deprecated. Please refer to the the `Decimal.js` package available at [Decimal.js Documentation](https://mikemcl.github.io/decimal.js/) for updated features and support.
 
