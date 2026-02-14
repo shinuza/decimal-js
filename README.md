@@ -1,8 +1,13 @@
 # Decimal.js
 
+# Deprecation Notice
+
+This package is deprecated. Please refer to the the `Decimal.js` package available at [Decimal.js Documentation](https://mikemcl.github.io/decimal.js/) for updated features and support.
+
+
 [![CI](https://github.com/shinuza/decimal-js/actions/workflows/test.yml/badge.svg)](https://github.com/shinuza/decimal-js/actions/workflows/test.yml)
 [![GitHub license](https://img.shields.io/github/license/shinuza/decimal-js)](https://github.com/shinuza/decimal-js/blob/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/decimal-js)](https://www.npmjs.com/package/decimal-js)
+[![npm package](https://img.shields.io/npm/v/decimal.svg)](https://www.npmjs.com/package/decimal)
 [![GitHub issues](https://img.shields.io/github/issues/shinuza/decimal-js)](https://github.com/shinuza/decimal-js/issues)
 
 Simple decimal arithmetic for the browser _and_ node.js!
